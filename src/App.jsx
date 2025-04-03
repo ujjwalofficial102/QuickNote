@@ -2,9 +2,9 @@ import { useState } from "react";
 import "./App.css";
 import { createBrowserRouter, RouterProvider } from "react-router-dom";
 import Home from "./components/Home";
-import Pastes from "./components/pastes";
 import ViewPaste from "./components/ViewPaste";
 import Navbar from "./components/Navbar";
+import Pastes from "./components/Pastes";
 
 const router = createBrowserRouter([
   {

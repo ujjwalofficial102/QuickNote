@@ -2,9 +2,9 @@ import { useState } from "react";
 import "./App.css";
 import { createBrowserRouter, RouterProvider } from "react-router-dom";
 import Home from "./components/Home";
-import ViewPaste from "./components/ViewPaste";
+import ViewNotes from "./components/ViewNote";
 import Navbar from "./components/Navbar";
-import Pastes from "./components/Pastes";
+import Notes from "./components/Notes";
 
 const router = createBrowserRouter([
   {
@@ -16,12 +16,12 @@ const router = createBrowserRouter([
         element: <Home />,
       },
       {
-        path: "/pastes",
-        element: <Pastes />,
+        path: "/notes",
+        element: <Notes />,
       },
       {
-        path: "/viewpastes/:id",
-        element: <ViewPaste />,
+        path: "/viewnotes/:id",
+        element: <ViewNotes />,
       },
     ],
   },

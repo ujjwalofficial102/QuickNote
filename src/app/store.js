@@ -1,8 +1,8 @@
 import { configureStore } from "@reduxjs/toolkit";
-import pasteReducer from "./pasteSlice";
+import noteReducer from "./noteSlice";
 
 export const store = configureStore({
   reducer: {
-    paste: pasteReducer,
+    note: noteReducer,
   },
 });

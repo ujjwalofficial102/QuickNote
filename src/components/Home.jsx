@@ -2,40 +2,40 @@ import { nanoid } from "@reduxjs/toolkit";
 import React, { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { useNavigate, useParams } from "react-router-dom";
-import { addToPastes, updateToPastes } from "../app/pasteSlice";
+import { addToNotes, updateToNotes } from "../app/noteSlice";
 import toast from "react-hot-toast";
 
 const Home = () => {
   const [title, setTitle] = useState("");
   const [value, setValue] = useState("");
   const [searchParams, setSearchParams] = useState(useParams());
-  const pasteId = searchParams;
-  //   console.log(pasteId);
-  const pastes = useSelector((state) => state.paste.pastes);
+  const noteId = searchParams;
+
+  const notes = useSelector((state) => state.note.notes);
   useEffect(() => {
-    if (pasteId.id) {
-      const paste = pastes.find((pas) => pas._id === pasteId.id);
-      setTitle(paste.title);
-      setValue(paste.content);
+    if (noteId.id) {
+      const note = notes.find((pas) => pas._id === noteId.id);
+      setTitle(note.title);
+      setValue(note.content);
     }
-  }, [pasteId.id]);
+  }, [noteId.id]);
 
   const dispatch = useDispatch();
   const navigate = useNavigate();
 
   function onClickHandler() {
-    const paste = {
+    const note = {
       title: title,
       content: value,
-      _id: pasteId.id || nanoid(),
+      _id: noteId.id || nanoid(),
     };
-    if (pasteId.id) {
+    if (noteId.id) {
       //update
-      dispatch(updateToPastes(paste));
+      dispatch(updateToNotes(note));
       navigate("/");
     } else {
       //create
-      dispatch(addToPastes(paste));
+      dispatch(addToNotes(note));
     }
 
     //after creation
@@ -60,7 +60,7 @@ const Home = () => {
           onClick={onClickHandler}
           className="bg-blue-800  w-25 cursor-pointer px-4 py-2 hover:bg-blue-900 rounded-r-md"
         >
-          {pasteId.id ? "Update" : "Create"}
+          {noteId.id ? "Update" : "Create"}
         </button>
       </div>
 

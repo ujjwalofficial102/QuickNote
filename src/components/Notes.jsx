@@ -1,16 +1,16 @@
 import React, { useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { Link } from "react-router-dom";
-import { removeAllPastes, removeFromPastes } from "../app/pasteSlice";
+import { removeAllNotes, removeFromNotes } from "../app/noteSlice";
 import toast from "react-hot-toast";
 
-const Pastes = () => {
+const Notes = () => {
   const [search, setSearch] = useState("");
-  const pastes = useSelector((state) => state.paste.pastes);
+  const notes = useSelector((state) => state.note.notes);
   const dispatch = useDispatch();
 
-  const filteredData = pastes.filter((paste) =>
-    paste.title.toLowerCase().includes(search.toLowerCase())
+  const filteredData = notes.filter((note) =>
+    note.title.toLowerCase().includes(search.toLowerCase())
   );
   return (
     <div>
@@ -27,26 +27,26 @@ const Pastes = () => {
       <div className="bg-[#151515] border border-gray-500 rounded-lg w-120 p-4">
         <ul className="space-y-3">
           {filteredData.length > 0 ? (
-            filteredData.map((paste) => (
+            filteredData.map((note) => (
               <li
-                key={paste._id}
+                key={note._id}
                 className="flex justify-between items-center border border-gray-500 p-4 rounded-lg"
               >
                 <Link
-                  to={`/viewpastes/${paste._id}`}
+                  to={`/viewnotes/${note._id}`}
                   className="text-white text-start"
                   title="edit"
                 >
-                  <div>{paste.title}</div>
+                  <div>{note.title}</div>
                   <div className="font-normal text-xs truncate w-50">
-                    {paste.content}
+                    {note.content}
                   </div>
                 </Link>
                 <div className="space-x-2">
                   <button
                     onClick={() => {
                       navigator.clipboard.writeText(
-                        window.location.origin + `/viewpastes/${paste._id}`
+                        window.location.origin + `/viewnotes/${note._id}`
                       );
                       toast.success("URL copied to clipboard");
                     }}
@@ -56,7 +56,7 @@ const Pastes = () => {
                   </button>
                   <button
                     onClick={() => {
-                      navigator.clipboard.writeText(paste?.content);
+                      navigator.clipboard.writeText(note?.content);
                       toast.success("Content Copied to clipboard");
                     }}
                     className="cursor-pointer bg-blue-700 py-1 px-3 rounded hover:bg-blue-800"
@@ -65,7 +65,7 @@ const Pastes = () => {
                   </button>
                   <button
                     onClick={() => {
-                      dispatch(removeFromPastes(paste));
+                      dispatch(removeFromNotes(note));
                     }}
                     className="cursor-pointer bg-red-700 py-1 px-2 rounded hover:bg-red-800"
                   >
@@ -82,7 +82,7 @@ const Pastes = () => {
       {filteredData.length > 0 ? (
         <button
           onClick={() => {
-            dispatch(removeAllPastes());
+            dispatch(removeAllNotes());
           }}
           className="cursor-pointer mt-2 bg-red-700 py-1 px-4 rounded hover:bg-red-800"
         >
@@ -93,4 +93,4 @@ const Pastes = () => {
   );
 };
 
-export default Pastes;
+export default Notes;

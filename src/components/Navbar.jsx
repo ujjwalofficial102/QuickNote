@@ -14,13 +14,12 @@ const Navbar = () => {
             Home
           </NavLink>
           <NavLink
-            to="/pastes"
+            to="/notes"
             className={({ isActive }) => (isActive ? "text-[#535bf2]" : "")}
           >
             My Notes
           </NavLink>
         </div>
-        {/* <NavLink to="/pastes/ok">ViewPastes</NavLink> */}
       </div>
       <hr className="text-slate-700 mt-4 mb-6 w-full" />
       <Outlet />
